@@ -2,10 +2,24 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-// Connect to database
-mongoose.connect('mongodb://127.0.0.1:27017');
+// // Connect to database
+mongoose.connect(
+  'mongodb://localhost/sample',
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  (err) => {
+    console.log(err ? err : 'connected');
+  }
+);
 
 // Instantiate the app
 const app = express();
 
-app.listen(3000);
+// Routes
+app.get('/', (req, res) => {
+  res.send('Welcome');
+});
+
+// Listening
+app.listen(3000, () => {
+  console.log(`Server is listening on PORT 3000`);
+});
